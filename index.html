@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Mini App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .question {
+            margin-bottom: 20px;
+        }
+        .question p {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .options input[type="radio"] {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="question" id="question1">
+            <p>Question 1: What is the capital of France?</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="Paris"> Paris</label>
+                <label><input type="radio" name="q1" value="Berlin"> Berlin</label>
+                <label><input type="radio" name="q1" value="London"> London</label>
+            </div>
+        </div>
+        <div class="question" id="question2">
+            <p>Question 2: Who wrote "Romeo and Juliet"?</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="Shakespeare"> Shakespeare</label>
+                <label><input type="radio" name="q2" value="Hemingway"> Hemingway</label>
+                <label><input type="radio" name="q2" value="Fitzgerald"> Fitzgerald</label>
+            </div>
+        </div>
+        <div class="question" id="question3">
+            <p>Question 3: What is the chemical symbol for water?</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="H2O"> H2O</label>
+                <label><input type="radio" name="q3" value="CO2"> CO2</label>
+                <label><input type="radio" name="q3" value="N2"> N2</label>
+            </div>
+        </div>
+        <div class="question" id="question4">
+            <p>Question 4: Who painted the Mona Lisa?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="Leonardo da Vinci"> Leonardo da Vinci</label>
+                <label><input type="radio" name="q4" value="Vincent van Gogh"> Vincent van Gogh</label>
+                <label><input type="radio" name="q4" value="Pablo Picasso"> Pablo Picasso</label>
+            </div>
+        </div>
+        <div class="question" id="question5">
+            <p>Question 5: What is the tallest mountain in the world?</p>
+            <div class="options">
+                <label><input type="radio" name="q5" value="Mount Everest"> Mount Everest</label>
+                <label><input type="radio" name="q5" value="K2"> K2</label>
+                <label><input type="radio" name="q5" value="Kangchenjunga"> Kangchenjunga</label>
+            </div>
+        </div>
+        <button onclick="calculateScore()">Submit Answers</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function calculateScore() {
+            let score = 0;
+            const correctAnswers = {
+                q1: "Paris",
+                q2: "Shakespeare",
+                q3: "H2O",
+                q4: "Leonardo da Vinci",
+                q5: "Mount Everest"
+            };
+
+            // Loop through each question
+            for (let i = 1; i <= 5; i++) {
+                const selectedAnswer = document.querySelector(`input[name=q${i}]:checked`);
+                if (selectedAnswer) {
+                    const questionId = `q${i}`;
+                    if (selectedAnswer.value === correctAnswers[questionId]) {
+                        score++;
+                    }
+                }
+            }
+
+            // Display the result
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = `Your total score is ${score}/5`;
+        }
+    </script>
+</body>
+</html>
